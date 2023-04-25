@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('categories');
             $table->integer('total_review');
             $table->float('price');
             $table->string('image_path')->nullable();
-            $table->string('colors')->nullable();
-            $table->string('sizes')->nullable();
+            $table->string('colors');
+            $table->string('sizes');
             $table->string('short_description');
             $table->string('long_description');
             $table->timestamps();

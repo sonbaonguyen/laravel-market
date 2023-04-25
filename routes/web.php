@@ -34,7 +34,7 @@ Route::put('/products/{product}/update', [ProductController::class, 'update'])->
 //delete
 Route::delete('/products/{product}/delete', [ProductController::class, 'destroy'])->middleware('auth');
 
-// User's upload products
+// User's upload products page
 Route::get('/products/uploaded', [ProductController::class, 'uploadedProducts'])->middleware('auth');
 
 // show

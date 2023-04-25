@@ -84,6 +84,19 @@
                                     <p class="help-block text-danger"></p>
                                 </div>
 
+                                {{-- Categories --}}
+                                <div class="pt-2">
+                                    <label>Categories:</label>
+                                    <div class="d-flex flex-wrap">
+                                        @foreach ($categories as $category)
+                                        <div class="custom-control custom-checkbox mb-3 ml-3">
+                                            <input type="checkbox" name="categories[]" class="custom-control-input" value="{{$category->name}}" id="category-{{$category->name}}">
+                                            <label class="custom-control-label" for="category-{{$category->name}}">{{$category->name}}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
                                 {{-- Colors --}}
                                 <div class="pt-2">
                                     <label>Available colors:</label>

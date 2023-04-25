@@ -18,11 +18,12 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'categories' => $this->faker->word(),
             'total_review' => $this->faker->numberBetween(5, 100),
             'price' => $this->faker->randomFloat(null, 10, 100),
             'image_path' => '@logos/1IVVFLQob3gpTcEPXDDAYwMtrozeOl0MobGRIXEz.jpg',
-            'colors' => null,
-            'sizes' => null,
+            'colors' => '@Green@Black',
+            'sizes' => '@M@XL',
             'short_description' => $this->faker->paragraph(1),
             'long_description' => $this->faker->paragraph(2)
         ];

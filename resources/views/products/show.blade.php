@@ -14,7 +14,8 @@
     <!-- Breadcrumb End -->
 
     @php
-        $images = explode('@', $product->image_path);
+        $path = substr($product->image_path, 1);
+        $images = explode('@', $path);
     @endphp
     <!-- Shop Detail Start -->
     <div class="container-fluid pb-5">
@@ -27,11 +28,13 @@
                             @for ($index = 0; $index < count($images); $index++)
                                 @if ($index == 0)
                                     <div class="carousel-item active">
-                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image">
+                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                            alt="Image">
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image">
+                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                            alt="Image">
                                     </div>
                                 @endif
                             @endfor
@@ -69,61 +72,42 @@
                         </div>
                         <small class="pt-1">({{ $product->total_review }} Reviews)</small>
                     </div>
+
                     <h3 class="font-weight-semi-bold mb-4">${{ $product->price }}</h3>
                     <p class="mb-4">
                         {{ $product->short_description }}
                     </p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
+                        @php
+                        $str = substr($product->sizes, 1);
+                        $itemSizes = explode('@', $str);
+                        @endphp
                         <form>
+                            @foreach ($itemSizes as $item)
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-1" name="size">
-                                <label class="custom-control-label" for="size-1">XS</label>
+                                <input type="radio" class="custom-control-input" id="size-{{$item}}" name="size-{{$item}}">
+                                <label class="custom-control-label" for="size-{{$item}}">{{$item}}</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-2" name="size">
-                                <label class="custom-control-label" for="size-2">S</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-3" name="size">
-                                <label class="custom-control-label" for="size-3">M</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-4" name="size">
-                                <label class="custom-control-label" for="size-4">L</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-5" name="size">
-                                <label class="custom-control-label" for="size-5">XL</label>
-                            </div>
+                            @endforeach
                         </form>
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Colors:</strong>
+                        @php
+                        $str = substr($product->colors, 1);
+                        $itemColors = explode('@', $str);
+                        @endphp
                         <form>
+                            @foreach ($itemColors as $item)
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-1" name="color">
-                                <label class="custom-control-label" for="color-1">Black</label>
+                                <input type="radio" class="custom-control-input" id="color-{{$item}}" name="color-{{$item}}">
+                                <label class="custom-control-label" for="color-{{$item}}">{{$item}}</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-2" name="color">
-                                <label class="custom-control-label" for="color-2">White</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-3" name="color">
-                                <label class="custom-control-label" for="color-3">Red</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-4" name="color">
-                                <label class="custom-control-label" for="color-4">Blue</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-5" name="color">
-                                <label class="custom-control-label" for="color-5">Green</label>
-                            </div>
+                            @endforeach
                         </form>
                     </div>
-                    <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="d-flex align-items-center mb-3 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-minus">
@@ -138,9 +122,29 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>
-                            Add To Cart</button>
+                        <button class="btn btn-primary px-3 mr-3"><i class="fa fa-shopping-cart mr-1"></i>
+                            Add to cart
+                        </button>
                     </div>
+                    <div class="mb-4 pt-2">
+                        <button class="btn btn-primary px-3 mr-3"><i class="fa fa-heart mr-1"></i>
+                            Add favourite
+                        </button>
+                    </div>
+
+                    @php
+                        // $path = substr($product->categories, 1);
+                        $items = explode(',', $product->categories);
+                    @endphp
+                    @if ($items)
+                        <div class="mb-3">
+                            @foreach ($items as $item)
+                                <a class="bg-dark text-decoration-none text-secondary border d-inline-block px-2"
+                                href="#">{{$item}}</a>
+                            @endforeach
+                        </div>
+                    @endif
+
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">

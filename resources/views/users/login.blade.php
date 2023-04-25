@@ -41,7 +41,7 @@
                             <div class="control-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="subject" name="password"
-                                    required="required" data-validation-required-message="Please enter a subject" />
+                                    required="required" data-validation-required-message="Please enter your password" />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="mt-4">
@@ -49,12 +49,12 @@
                                     Login
                                 </button>
                             </div>
-                            <div class="mt-3">
-                                <a href="" class="text-info">Forgot password</a>
-                            </div>
+                            {{-- <div class="mt-3">
+                                <a href="#" class="text-info">Forgot password</a>
+                            </div> --}}
                             <div class="mt-5 d-flex">
                                 <p>Don't have an account?</p>
-                                <a href="" class="pl-2 text-info">Register here</a>
+                                <a href="/register" class="pl-2 text-info">Register here</a>
                             </div>
                         </form>
                     </div>

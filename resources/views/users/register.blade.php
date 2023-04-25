@@ -69,7 +69,7 @@
                             </div>
                             <div class="mt-5 d-flex">
                                 <p>Already have an account?</p>
-                                <a href="" class="pl-2 text-info">Login here</a>
+                                <a href="/login" class="pl-2 text-info">Login here</a>
                             </div>
                         </form>
                     </div>
