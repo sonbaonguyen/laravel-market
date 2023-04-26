@@ -11,6 +11,7 @@ class ProductController extends Controller
     public function index() {
         if (auth()->check()) {
             $index = 0;
+            $favorites = [];
             foreach (auth()->user()->favorites as $item) {
                 $favorites[$index] = $item->product_id;
                 $index++;
@@ -168,7 +169,8 @@ class ProductController extends Controller
             return back()->with('message', 'Add favorite!');
         }
         else {
-
+            // DELETE
+            return back()->with('message', 'Remove favorite!');
         }
     }
 }
