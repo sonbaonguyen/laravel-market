@@ -40,6 +40,9 @@ Route::get('/products/uploaded', [ProductController::class, 'uploadedProducts'])
 // show
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
+// Favorite/store
+Route::post('/products/{product}/favorite', [ProductController::class, 'favorite'])->middleware('auth');
+
 //------------------------------------------------------------------------------------------------- User
 
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');

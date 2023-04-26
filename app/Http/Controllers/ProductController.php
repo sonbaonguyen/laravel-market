@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index() {
-        return view('products.index', ['products' => Product::latest()->get()]);
+        if (auth()->check()) {
+            $index = 0;
+            foreach (auth()->user()->favorites as $item) {
+                $favorites[$index] = $item->product_id;
+                $index++;
+            }
+            return view('products.index', ['products' => Product::latest()->get(), 'favorites' => $favorites]);
+        }
+        else if (auth()->check() == false) {
+            return view('products.index', ['products' => Product::latest()->get()]);
+        }
     }
 
     public function show(Product $product) {
@@ -140,5 +151,24 @@ class ProductController extends Controller
     public function uploadedProducts() {
         // dd(auth()->user()->products);
         return view('products.uploaded', ['products' => auth()->user()->products]);
+    }
+
+    public function favorite(Product $product) {
+        $existItem = Favorite::all()
+        ->where('user_id', '=', auth()->id())
+        ->where('product_id', '=', $product->id);
+
+        if (count($existItem) == 0) {
+            // ADD
+            $new_favorite = [
+                'user_id' => auth()->id(),
+                'product_id' => $product->id
+            ];
+            Favorite::create($new_favorite);
+            return back()->with('message', 'Add favorite!');
+        }
+        else {
+
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // Share product categories to all views
         View::share('categories', Category::all());
+
+        if (auth()->check()) {
+            // Share users to all views
+            View::share('favorites', auth()->user()->favorites);
+        }
     }
 }
