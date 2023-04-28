@@ -158,10 +158,17 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
+
+                            @if (count($products) <= 0)
+                            <div class="">
+                                <h2>You haven't uploaded anything yet!</h2>
+                            </div>
+                            @else
                             <div>
                                 <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
                                 <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
                             </div>
+                            @endif
                             <div class="ml-2">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle"
@@ -185,11 +192,7 @@
                         </div>
                     </div>
 
-                    @if ($products->count() <= 0)
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1 mb-4">
-                        <div>Nothing here to show</div>
-                    </div>
-                    @else
+                    @if ($products->count() > 0)
                         @foreach ($products as $item)
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                 <x-product-card :product="$item" />

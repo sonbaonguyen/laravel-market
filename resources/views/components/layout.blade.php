@@ -103,9 +103,9 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <form action="/products">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" name="search" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -134,7 +134,7 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
                         @foreach ($categories as $category)
-                        <a href="" class="nav-item nav-link">{{$category->name}}</a>
+                        <a href="/products/?category={{$category->name}}" class="nav-item nav-link">{{$category->name}}</a>
                         @endforeach
                         {{-- <a href="" class="nav-item nav-link">Shirts</a>
                         <a href="" class="nav-item nav-link">Jeans</a>

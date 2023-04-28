@@ -156,13 +156,46 @@
 
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
+
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div>
+                            {{-- <div>
                                 <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
                                 <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-                            </div>
+                            </div> --}}
+                            @if (!empty($message))
+                                @if (count($message) > 0)
+                                    <div class="">
+                                        <h2>
+                                            @php
+                                                $str = '';
+                                                if (count($products) <= 0) {
+                                                    $str = 'No result for \'';
+                                                } else {
+                                                    $str = 'Results for \'';
+                                                }
+                                                for ($index = 0; $index < count($message); $index++) {
+                                                    if ($index == 0) {
+                                                        $str = $str . $message[$index];
+                                                    } elseif ($index == count($message) - 1) {
+                                                        $str = $str . ' ' . $message[$index];
+                                                    } else {
+                                                        $str = $str . ' ' . $message[$index] . ' and';
+                                                    }
+                                                }
+                                                $str = $str . '\'';
+                                            @endphp
+                                            {{ $str }}
+                                        </h2>
+                                    </div>
+                                @endif
+                            @else
+                                <div>
+                                    <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                                    <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                                </div>
+                            @endif
                             <div class="ml-2">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle"
@@ -221,6 +254,7 @@
                         @endforeach
                     @endempty
 
+                    @if (count($products) > 0)
                     <div class="col-12">
                         <nav>
                             <ul class="pagination justify-content-center">
@@ -233,6 +267,7 @@
                             </ul>
                         </nav>
                     </div>
+                    @endif
                 </div>
             </div>
             <!-- Shop Product End -->

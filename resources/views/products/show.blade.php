@@ -21,19 +21,19 @@
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
             <div class="col-lg-5 mb-30">
-                <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner bg-light">
+                <div id="product-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-ride="carousel">
+                    <div class="carousel-inner bg-light img-limit-custom-size-fixed">
 
                         @if ($images)
                             @for ($index = 0; $index < count($images); $index++)
                                 @if ($index == 0)
                                     <div class="carousel-item active">
-                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                        <img class="w-100 h-100 img-limit-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
                                             alt="Image">
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                        <img class="w-100 h-100" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                        <img class="w-100 h-100 img-limit-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
                                             alt="Image">
                                     </div>
                                 @endif
@@ -50,17 +50,19 @@
 
 
                     </div>
+                    @if (count($images) > 1)
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
                     </a>
                     <a class="carousel-control-next" href="#product-carousel" data-slide="next">
                         <i class="fa fa-2x fa-angle-right text-dark"></i>
                     </a>
+                    @endif
                 </div>
             </div>
 
             <div class="col-lg-7 h-auto mb-30">
-                <div class="h-100 bg-light p-30">
+                <div class="h-100 bg-light p-30 px-5 py-5">
                     <h3>{{ $product->name }}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
@@ -80,30 +82,34 @@
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
                         @php
-                        $str = substr($product->sizes, 1);
-                        $itemSizes = explode('@', $str);
+                            $str = substr($product->sizes, 1);
+                            $itemSizes = explode('@', $str);
                         @endphp
                         <form>
                             @foreach ($itemSizes as $item)
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-{{$item}}" name="size-{{$item}}">
-                                <label class="custom-control-label" for="size-{{$item}}">{{$item}}</label>
-                            </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="size-{{ $item }}"
+                                        name="size-{{ $item }}">
+                                    <label class="custom-control-label"
+                                        for="size-{{ $item }}">{{ $item }}</label>
+                                </div>
                             @endforeach
                         </form>
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Colors:</strong>
                         @php
-                        $str = substr($product->colors, 1);
-                        $itemColors = explode('@', $str);
+                            $str = substr($product->colors, 1);
+                            $itemColors = explode('@', $str);
                         @endphp
                         <form>
                             @foreach ($itemColors as $item)
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="color-{{$item}}" name="color-{{$item}}">
-                                <label class="custom-control-label" for="color-{{$item}}">{{$item}}</label>
-                            </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" id="color-{{ $item }}"
+                                        name="color-{{ $item }}">
+                                    <label class="custom-control-label"
+                                        for="color-{{ $item }}">{{ $item }}</label>
+                                </div>
                             @endforeach
                         </form>
                     </div>
@@ -114,8 +120,7 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center"
-                                value="1">
+                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
@@ -133,14 +138,17 @@
                     </div>
 
                     @php
+                        $length = Str::length($product->categories);
+                        $str = Str::substr($product->categories, 1, $length - 2);
                         // $path = substr($product->categories, 1);
-                        $items = explode(',', $product->categories);
+                        $items = explode('@', $str);
                     @endphp
+
                     @if ($items)
                         <div class="mb-3">
                             @foreach ($items as $item)
                                 <a class="bg-dark text-decoration-none text-secondary border d-inline-block px-2"
-                                href="#">{{$item}}</a>
+                                    href="/products/?category={{ $item }}">{{ $item }}</a>
                             @endforeach
                         </div>
                     @endif
@@ -166,20 +174,30 @@
             </div>
         </div>
 
-        <div class="col px-xl-5 pb-3 d-flex justify-content-end">
-            <a class="btn btn-primary px-3 ml-3" href="/products/{{ $product->id }}/edit"><i
-                    class="fa fa-shopping-cart mr-1"></i>
-                Edit product
-            </a>
+        @php
+            $isAuthorized = false;
+            if (Auth::check()) {
+                if (Auth::user()->id == $product->user_id) {
+                    $isAuthorized = true;
+                }
+            }
+        @endphp
+        @if ($isAuthorized)
+            <div class="col px-xl-5 pb-3 d-flex justify-content-end">
+                <a class="btn btn-primary px-3 ml-3" href="/products/{{ $product->id }}/edit"><i
+                        class="fa fa-shopping-cart mr-1"></i>
+                    Edit product
+                </a>
 
-            <form method="POST" action="/products/{{ $product->id }}/delete">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger px-3 ml-3"><i class="fa fa-shopping-cart mr-1"></i>
-                    Delete product
-                </button>
-            </form>
-        </div>
+                <form method="POST" action="/products/{{ $product->id }}/delete">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger px-3 ml-3"><i class="fa fa-shopping-cart mr-1"></i>
+                        Delete product
+                    </button>
+                </form>
+            </div>
+        @endif
 
         <div class="row px-xl-5">
             <div class="col">

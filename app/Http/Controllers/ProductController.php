@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
+        // dd(request()->all());
+        $filterMessage = [];
+        $index = 0;
+        if (request('search') ?? false) {
+            $filterMessage[$index] = request('search');
+            $index++;
+        }
+
+        if (request('category') ?? false) {
+            $filterMessage[$index] = request('category');
+            $index++;
+        }
+
+
         if (auth()->check()) {
             $index = 0;
             $favorites = [];
@@ -16,10 +30,12 @@ class ProductController extends Controller
                 $favorites[$index] = $item->product_id;
                 $index++;
             }
-            return view('products.index', ['products' => Product::latest()->get(), 'favorites' => $favorites]);
+
+            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->simplePaginate(5), 'favorites' => $favorites])->with('message', $filterMessage);
         }
         else if (auth()->check() == false) {
-            return view('products.index', ['products' => Product::latest()->get()]);
+            // dd(empty($filterMessage));
+            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->simplePaginate(5)])->with('message', $filterMessage);
         }
     }
 
@@ -58,6 +74,19 @@ class ProductController extends Controller
         }
         else {
             $formFields['image_path'] = 'Not received';
+        }
+
+        // If categories exist and not null
+        if ($request->categories ?? false) {
+            $allCategories = '';
+            foreach ($request->categories as $cat) {
+                $allCategories = $allCategories . '@' . $cat;
+            }
+            $allCategories = $allCategories . '@';
+            $formFields['categories'] = $allCategories;
+        }
+        else {
+            $formFields['categories'] = 'Not received';
         }
 
         // If color exist and not null
@@ -115,6 +144,16 @@ class ProductController extends Controller
             }
             // dd($imageAll);
             $formFields['image_path'] = $imageAll;
+        }
+
+        // If categories exist and not null
+        if ($request->categories ?? false) {
+            $allCategories = '';
+            foreach ($request->categories as $cat) {
+                $allCategories = $allCategories . '@' . $cat;
+            }
+            $allCategories = $allCategories . '@';
+            $formFields['categories'] = $allCategories;
         }
 
         // If color exist and not null

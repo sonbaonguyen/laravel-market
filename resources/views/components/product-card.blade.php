@@ -6,8 +6,8 @@
 @endphp
 
     <div class="product-item bg-light mb-4">
-        <div class="product-img position-relative overflow-hidden">
-            <img class="img-fluid w-100" src="{{ URL::to('/') }}/storage/{{$images[0]}}" alt="">
+        <div class="product-img position-relative overflow-hidden img-contain-card-fixed d-flex justify-content-center align-items-center">
+            <img class="img-fluid w-100 img-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{$images[0]}}" alt="">
             <div class="product-action">
                 <a class="btn btn-outline-dark btn-square" href="#"><i class="fa fa-shopping-cart"></i></a>
                 <form action="/products/{{$product->id}}/favorite" method="POST">

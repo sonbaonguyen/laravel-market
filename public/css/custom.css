@@ -5,3 +5,25 @@
 .a-favorite-fav i {
     color: rgb(255, 211, 51);
 }
+
+.img-contain-card-fixed {
+    /* height: 32em; */
+    height: 26vw;
+}
+
+.img-custom-size-fixed {
+    width: 22vw !important;
+    max-height: 100% !important;
+}
+
+.img-contain-slide-fixed {
+    /** Slide field that contain all the slide images and prev/next button
+    *
+    */
+    /* max-height: 42em; */
+}
+
+.img-limit-custom-size-fixed {
+    max-width: 36em !important;
+    max-height: 42em !important;
+}

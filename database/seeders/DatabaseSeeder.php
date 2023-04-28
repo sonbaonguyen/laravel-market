@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Product::factory(3)->create([
             'user_id' => $user->id,
-            'categories' => 'Men, Kid, Computer'
+            'categories' => '@Men@Kid@Computer@'
         ]);
 
 
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Product::factory(5)->create([
             'user_id' => $user02->id,
-            'categories' => 'Women, Clothes, Accessories'
+            'categories' => '@Women@Clothes@Accessories@'
         ]);
 
         // Categories
