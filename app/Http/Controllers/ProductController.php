@@ -22,6 +22,9 @@ class ProductController extends Controller
             $index++;
         }
 
+        // $pagingNumber = 1;
+        $pagingNumber = config('constants.PAGING_PAGENUMBER');
+
 
         if (auth()->check()) {
             $index = 0;
@@ -31,11 +34,11 @@ class ProductController extends Controller
                 $index++;
             }
 
-            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->simplePaginate(5), 'favorites' => $favorites])->with('message', $filterMessage);
+            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->paginate($pagingNumber), 'favorites' => $favorites])->with('message', $filterMessage);
         }
         else if (auth()->check() == false) {
             // dd(empty($filterMessage));
-            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->simplePaginate(5)])->with('message', $filterMessage);
+            return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->paginate($pagingNumber)])->with('message', $filterMessage);
         }
     }
 
@@ -189,8 +192,14 @@ class ProductController extends Controller
     }
 
     public function uploadedProducts() {
-        // dd(auth()->user()->products);
-        return view('products.uploaded', ['products' => auth()->user()->products]);
+
+        $pagingNumber = config('constants.PAGING_PAGENUMBER');
+        return view('products.uploaded',
+            [
+                'products' => Product::latest()
+                ->where('user_id', '=', auth()->id())->paginate($pagingNumber)
+            ]
+        );
     }
 
     public function favorite(Product $product) {

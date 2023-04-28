@@ -6,6 +6,16 @@
     color: rgb(255, 211, 51);
 }
 
+
+.img-product-card-title-custom {
+    display: flex;
+    height: 4vw;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.5vw;
+    padding-bottom: 1vw;
+}
+
 .img-contain-card-fixed {
     /* height: 32em; */
     height: 26vw;
@@ -16,14 +26,16 @@
     max-height: 100% !important;
 }
 
-.img-contain-slide-fixed {
-    /** Slide field that contain all the slide images and prev/next button
-    *
-    */
-    /* max-height: 42em; */
-}
-
 .img-limit-custom-size-fixed {
     max-width: 36em !important;
     max-height: 42em !important;
+}
+
+.img-bg-container-custom-size {
+    height: 40vw;
+    font-size: 3em;
+}
+
+.img-slide-custom-size {
+    height: auto;
 }

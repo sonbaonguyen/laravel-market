@@ -20,43 +20,40 @@
     <!-- Shop Detail Start -->
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
+
             <div class="col-lg-5 mb-30">
-                <div id="product-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-ride="carousel">
-                    <div class="carousel-inner bg-light img-limit-custom-size-fixed">
-
-                        @if ($images)
-                            @for ($index = 0; $index < count($images); $index++)
-                                @if ($index == 0)
-                                    <div class="carousel-item active">
-                                        <img class="w-100 h-100 img-limit-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
-                                            alt="Image">
-                                    </div>
-                                @else
-                                    <div class="carousel-item">
-                                        <img class="w-100 h-100 img-limit-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
-                                            alt="Image">
-                                    </div>
-                                @endif
-                            @endfor
-                        @else
-                            <div class="carousel-item active">
-                                <img class="w-100 h-100" src="{{ URL::to('/') }}/img/product-1.jpg" alt="Image">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="w-100 h-100" src="{{ URL::to('/') }}/img/product-1.jpg" alt="Image">
-                            </div>
-                        @endif
-
-
-
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div
+                        class="carousel-inner bg-light img-bg-container-custom-size d-flex justify-content-center align-items-center">
+                        <div>
+                            @if ($images)
+                                @for ($index = 0; $index < count($images); $index++)
+                                    @if ($index == 0)
+                                        <div class="carousel-item active">
+                                            <img class="w-100 img-slide-custom-size"
+                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image not found">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item">
+                                            <img class="w-100 img-slide-custom-size"
+                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image not found">
+                                        </div>
+                                    @endif
+                                @endfor
+                            @else
+                                <div class="carousel-item active">
+                                    <img class="w-100 img-slide-custom-size" src="{{ URL::to('/') }}/img/no-imagezzz.jpg" alt="Image not found">
+                                </div>
+                            @endif
+                        </div>
                     </div>
                     @if (count($images) > 1)
-                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
-                    </a>
+                        <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                            <i class="fa fa-2x fa-angle-left text-dark"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                            <i class="fa fa-2x fa-angle-right text-dark"></i>
+                        </a>
                     @endif
                 </div>
             </div>
@@ -221,7 +218,7 @@
                                     <h4 class="mb-4">{{ $product->total_review }} review for "{{ $product->name }}"
                                     </h4>
                                     <div class="media mb-4">
-                                        <img src="{{ URL::to('/') }}/img/user.jpg" alt="Image"
+                                        <img src="{{ URL::to('/') }}/img/user.jpg" alt="Image not found"
                                             class="img-fluid mr-3 mt-1" style="width: 45px;">
                                         <div class="media-body">
                                             <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>

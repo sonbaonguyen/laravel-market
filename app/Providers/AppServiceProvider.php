@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Favorite;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Tell paginator to use bootstrap instead of default (Tailwind)
+        Paginator::useBootstrap();
+
         // Share product categories to all views
         View::share('categories', Category::all());
 
