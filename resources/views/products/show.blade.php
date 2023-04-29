@@ -23,26 +23,28 @@
 
             <div class="col-lg-5 mb-30">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div
-                        class="carousel-inner bg-light img-bg-container-custom-size d-flex justify-content-center align-items-center">
+                    <div class="carousel-inner bg-light img-bg-container-custom-size d-flex justify-content-center align-items-center">
                         <div>
                             @if ($images)
                                 @for ($index = 0; $index < count($images); $index++)
                                     @if ($index == 0)
                                         <div class="carousel-item active">
                                             <img class="w-100 img-slide-custom-size"
-                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image not found">
+                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                                alt="Image not found">
                                         </div>
                                     @else
                                         <div class="carousel-item">
                                             <img class="w-100 img-slide-custom-size"
-                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}" alt="Image not found">
+                                                src="{{ URL::to('/') }}/storage/{{ $images[$index] }}"
+                                                alt="Image not found">
                                         </div>
                                     @endif
                                 @endfor
                             @else
                                 <div class="carousel-item active">
-                                    <img class="w-100 img-slide-custom-size" src="{{ URL::to('/') }}/img/no-imagezzz.jpg" alt="Image not found">
+                                    <img class="w-100 img-slide-custom-size"
+                                        src="{{ URL::to('/') }}/img/no-imagezzz.jpg" alt="Image not found">
                                 </div>
                             @endif
                         </div>

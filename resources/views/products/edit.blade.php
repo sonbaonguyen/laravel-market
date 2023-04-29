@@ -80,7 +80,7 @@
 
                                 <div class="control-group">
                                     <label for="image_path">Image</label>
-                                    <input type="file" class="form-control" id="image_path" name="image_path"
+                                    <input type="file" class="form-control" id="image_path" name="image_path[]" multiple
                                         data-validation-required-message="Please enter product image" />
                                     <p class="help-block text-danger"></p>
                                 </div>
