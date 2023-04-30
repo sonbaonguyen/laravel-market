@@ -56,4 +56,5 @@ class UserController extends Controller
 
         return redirect('/')->with('message', 'Register successfully!');
     }
+
 }

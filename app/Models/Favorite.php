@@ -18,4 +18,16 @@ class Favorite extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    // Return user's favorite list as an array, not collection
+    public static function userFavorites()
+    {
+        $index = 0;
+        $favorites = [];
+        foreach (auth()->user()->favorites as $item) {
+            $favorites[$index] = $item->product_id;
+            $index++;
+        }
+        return $favorites;
+    }
 }

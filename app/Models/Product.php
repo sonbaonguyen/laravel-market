@@ -24,19 +24,21 @@ class Product extends Model
         'long_description'
     ];
 
-    public function scopeFilter($query, array $filter) {
+    public function scopeFilter($query, array $filter)
+    {
         if ($filter['search'] ?? false) {
-            $query->where('name', 'like', '%'.request('search').'%')
-            ->orWhere('short_description', 'like', '%'.request('search').'%')
-            ->orWhere('long_description', 'like', '%'.request('search').'%');
+            $query->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('short_description', 'like', '%' . request('search') . '%')
+                ->orWhere('long_description', 'like', '%' . request('search') . '%');
         }
 
         if ($filter['category'] ?? false) {
-            $query->where('categories', 'like', '%@'.request('category').'@%');
+            $query->where('categories', 'like', '%@' . request('category') . '@%');
         }
     }
 
-    public static function storeProduct(Request $request) {
+    public static function storeProduct(Request $request)
+    {
         $formFields = $request->validate([
             'name' => ['required'],
             'price' => ['required', 'numeric'],
@@ -52,12 +54,11 @@ class Product extends Model
             $imageAll = '';
             // dd($request->file('image_path'));
             foreach ($request->file('image_path') as $image) {
-                $imageAll = $imageAll.'@'.$image->store('logos', 'public');
+                $imageAll = $imageAll . '@' . $image->store('logos', 'public');
             }
             // dd($imageAll);
             $formFields['image_path'] = $imageAll;
-        }
-        else {
+        } else {
             $formFields['image_path'] = 'Not received';
         }
 
@@ -69,8 +70,7 @@ class Product extends Model
             }
             $allCategories = $allCategories . '@';
             $formFields['categories'] = $allCategories;
-        }
-        else {
+        } else {
             $formFields['categories'] = 'Not received';
         }
 
@@ -81,8 +81,7 @@ class Product extends Model
                 $allColors = $allColors . '@' . $color;
             }
             $formFields['colors'] = $allColors;
-        }
-        else {
+        } else {
             $formFields['colors'] = 'Not received';
         }
 
@@ -93,8 +92,7 @@ class Product extends Model
                 $allSizes = $allSizes . '@' . $size;
             }
             $formFields['sizes'] = $allSizes;
-        }
-        else {
+        } else {
             $formFields['sizes'] = 'Not received';
         }
 
@@ -105,7 +103,8 @@ class Product extends Model
         Product::create($formFields);
     }
 
-    public function updateProduct(Request $request) {
+    public function updateProduct(Request $request)
+    {
         $formFields = $request->validate([
             'name' => ['required'],
             'price' => ['required', 'numeric'],
@@ -118,7 +117,7 @@ class Product extends Model
             $imageAll = '';
             // dd($request->file('image_path'));
             foreach ($request->file('image_path') as $image) {
-                $imageAll = $imageAll.'@'.$image->store('logos', 'public');
+                $imageAll = $imageAll . '@' . $image->store('logos', 'public');
             }
             // dd($imageAll);
             $formFields['image_path'] = $imageAll;
@@ -159,35 +158,39 @@ class Product extends Model
         $this->update($formFields);
     }
 
-    public static function getFavoriteProducts() {
+    public static function getFavoriteProducts()
+    {
         $pagingNumber = config('constants.PAGING_PAGENUMBER');
 
         $products = DB::table('products')
-        ->join('favorites', 'products.id', '=', 'favorites.product_id')
-        ->where('favorites.user_id', '=', auth()->id())
-        ->paginate($pagingNumber);
+            ->join('favorites', 'products.id', '=', 'favorites.product_id')
+            ->where('favorites.user_id', '=', auth()->id())
+            ->paginate($pagingNumber);
 
         // dd($products);
 
         return $products;
     }
 
-    public static function getUploadedProducts() {
+    public static function getUploadedProducts()
+    {
         $pagingNumber = config('constants.PAGING_PAGENUMBER');
         $products = Product::latest()
-                ->where('user_id', '=', auth()->id())->paginate($pagingNumber);
+            ->where('user_id', '=', auth()->id())->paginate($pagingNumber);
         return $products;
     }
 
     // Relationship to user
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function addFavorite() {
+    public function addFavorite()
+    {
         $existItem = Favorite::all()
-        ->where('user_id', '=', auth()->id())
-        ->where('product_id', '=', $this->id);
+            ->where('user_id', '=', auth()->id())
+            ->where('product_id', '=', $this->id);
 
         // dd($existItem);
 
@@ -199,15 +202,16 @@ class Product extends Model
             ];
             Favorite::create($new_favorite);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    public function removeFavorite() {
+    public function removeFavorite()
+    {
         DB::table("favorites")
-        ->where('user_id', '=', auth()->id())
-        ->where('product_id', '=', $this->id)->delete();
+            ->where('user_id', '=', auth()->id())
+            ->where('product_id', '=', $this->id)->delete();
     }
+
 }
