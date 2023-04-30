@@ -33,9 +33,18 @@ class AppServiceProvider extends ServiceProvider
         // Share product categories to all views
         View::share('categories', Category::all());
 
-        if (auth()->check()) {
-            // Share users to all views
-            View::share('favorites', auth()->user()->favorites);
-        }
+
+        // View::share('favorites', auth()->check() ? auth()->user()->favorites : null);
+
+        // View::composer('/products/favorites', function (View $view) {
+        //     $favorites = null;
+        //     if (auth()->check()) {
+        //         // Share users to all views
+        //         // View::share('favorites', auth()->user()->favorites);
+        //         $favorites = auth()->user()->favorites;
+        //     }
+
+        //     $view->with('favorites', $favorites);
+        // });
     }
 }

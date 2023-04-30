@@ -1,5 +1,5 @@
 <?php
     return [
-        'PAGING_PAGENUMBER' => 6
+        'PAGING_PAGENUMBER' => 8
     ]
 ?>

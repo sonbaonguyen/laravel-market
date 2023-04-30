@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -158,6 +159,19 @@ class Product extends Model
         $this->update($formFields);
     }
 
+    public static function getFavoriteProducts() {
+        $pagingNumber = config('constants.PAGING_PAGENUMBER');
+
+        $products = DB::table('products')
+        ->join('favorites', 'products.id', '=', 'favorites.product_id')
+        ->where('favorites.user_id', '=', auth()->id())
+        ->paginate($pagingNumber);
+
+        // dd($products);
+
+        return $products;
+    }
+
     public static function getUploadedProducts() {
         $pagingNumber = config('constants.PAGING_PAGENUMBER');
         $products = Product::latest()
@@ -175,6 +189,8 @@ class Product extends Model
         ->where('user_id', '=', auth()->id())
         ->where('product_id', '=', $this->id);
 
+        // dd($existItem);
+
         if (count($existItem) == 0) {
             // ADD
             $new_favorite = [
@@ -187,5 +203,11 @@ class Product extends Model
         else {
             return false;
         }
+    }
+
+    public function removeFavorite() {
+        DB::table("favorites")
+        ->where('user_id', '=', auth()->id())
+        ->where('product_id', '=', $this->id)->delete();
     }
 }

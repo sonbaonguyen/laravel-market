@@ -74,19 +74,34 @@ class ProductController extends Controller
     }
 
     public function uploadedProducts() {
-        return view('products.uploaded',
+        return view('products.u_uploaded',
             [
                 'products' => Product::getUploadedProducts()
             ]
         );
     }
 
-    public function favorite(Product $product) {
-        if ($product->addFavorite()) {
-            return back()->with('message', 'Add favorite!');
+    public function favoriteProducts() {
+        return view('products.u_favorites',
+            [
+                'products' => Product::getFavoriteProducts()
+            ]
+        );
+    }
+
+
+    public function toggleFavorite(Product $product) {
+        // Adding favorite
+        if (!$product->addFavorite()) {
+            // Remove if already a favorite
+            $product->removeFavorite();
         }
-        else {
-            return back()->with('message', 'Failed to add favorite!');
-        }
+        // Return number of favorites
+        return $this->countFavorite();
+    }
+
+    public function countFavorite() {
+        $total_favorite = count(Favorite::all()->where('user_id', '=', auth()->id()));
+        return $total_favorite;
     }
 }

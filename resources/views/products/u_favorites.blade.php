@@ -6,7 +6,7 @@
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="#">Home</a>
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shop List</span>
+                    <span class="breadcrumb-item active">My Favorites</span>
                 </nav>
             </div>
         </div>
@@ -164,38 +164,12 @@
                                 <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
                                 <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
                             </div> --}}
-                            @if (!empty($message))
-                                @if (count($message) > 0)
-                                    <div class="">
-                                        <h2>
-                                            @php
-                                                $str = '';
-                                                if (count($products) <= 0) {
-                                                    $str = 'No result for \'';
-                                                } else {
-                                                    $str = 'Results for \'';
-                                                }
-                                                for ($index = 0; $index < count($message); $index++) {
-                                                    if ($index == 0) {
-                                                        $str = $str . $message[$index];
-                                                    } elseif ($index == count($message) - 1) {
-                                                        $str = $str . ' ' . $message[$index];
-                                                    } else {
-                                                        $str = $str . ' ' . $message[$index] . ' and';
-                                                    }
-                                                }
-                                                $str = $str . '\'';
-                                            @endphp
-                                            {{ $str }}
-                                        </h2>
-                                    </div>
-                                @endif
-                            @else
-                                <div>
-                                    <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
-                                    <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-                                </div>
-                            @endif
+
+                            <div>
+                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                            </div>
+
                             <div class="ml-2">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle"

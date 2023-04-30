@@ -37,11 +37,17 @@ Route::delete('/products/{product}/delete', [ProductController::class, 'destroy'
 // User's upload products page
 Route::get('/products/uploaded', [ProductController::class, 'uploadedProducts'])->middleware('auth');
 
+// User's favorites products page
+Route::get('/products/favorites', [ProductController::class, 'favoriteProducts'])->middleware('auth');
+
 // show
 Route::get('/products/{product}', [ProductController::class, 'show']);
 
 // Favorite/store
-Route::post('/products/{product}/favorite', [ProductController::class, 'favorite'])->middleware('auth');
+Route::post('/products/{product}/favorite', [ProductController::class, 'toggleFavorite'])->middleware('auth');
+
+// Get total number of favorite products
+Route::post('/favorites/count', [ProductController::class, 'countFavorite']);
 
 //------------------------------------------------------------------------------------------------- User
 

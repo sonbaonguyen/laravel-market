@@ -20,7 +20,7 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($formFields)) {
-            // $request->session()->regenerate();
+            $request->session()->regenerate();
             return redirect('/')->with('message','Login successful!');
         }
         else {
@@ -31,8 +31,8 @@ class UserController extends Controller
     public function logout(Request $request) {
         Auth::logout();
 
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect('/')->with('message', 'Logout successful!');
     }
