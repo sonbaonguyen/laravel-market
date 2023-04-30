@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function homepage() {
+        return view('pages.home', [
+            'lastests' => Product::latest()->take(8)->get()
+        ]);
+    }
+
     public function index(Request $request)
     {
         // dd(request()->all());
