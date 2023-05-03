@@ -151,11 +151,17 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link active">Home</a>
+                            {{-- <a href="/" class="nav-item nav-link active">Home</a>
                             <a href="/products" class="nav-item nav-link">Shop</a>
                             <a href="/products/uploaded" class="nav-item nav-link">My products</a>
                             <a href="/products/favorites" class="nav-item nav-link">My favorites</a>
-                            <a href="/products/upload" class="nav-item nav-link">Upload product</a>
+                            <a href="/products/upload" class="nav-item nav-link">Upload product</a> --}}
+
+                            <a href="/" class="{{ (request()->path() === ('/')) ? 'nav-item nav-link active' : 'nav-item nav-link' }}">Home</a>
+                            <a href="/products" class="{{ (request()->path() === ('products')) ? 'nav-item nav-link active' : 'nav-item nav-link' }}">Shop</a>
+                            <a href="/products/uploaded" class="{{ (request()->path() === ('products/uploaded')) ? 'nav-item nav-link active' : 'nav-item nav-link' }}">My products</a>
+                            <a href="/products/favorites" class="{{ (request()->path() === ('products/favorites')) ? 'nav-item nav-link active' : 'nav-item nav-link' }}">My favorites</a>
+                            <a href="/products/upload" class="{{ (request()->path() === ('products/upload')) ? 'nav-item nav-link active' : 'nav-item nav-link' }}">Upload product</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="/products/favorites" class="btn px-0 ml-3">
