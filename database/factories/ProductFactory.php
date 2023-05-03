@@ -19,8 +19,8 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'categories' => $this->faker->word(),
-            'total_review' => $this->faker->numberBetween(5, 100),
-            'price' => $this->faker->randomFloat(null, 10, 100),
+            'total_review' => $this->faker->numberBetween(1, 200),
+            'price' => $this->faker->randomFloat(null, 1, 500),
             'image_path' => '@logos/1IVVFLQob3gpTcEPXDDAYwMtrozeOl0MobGRIXEz.jpg',
             'colors' => '@Green@Black',
             'sizes' => '@M@XL',
