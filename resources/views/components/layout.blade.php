@@ -35,10 +35,10 @@
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">Become a seller</a>
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Support</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
+                    <a class="text-body mr-3" href="#">Become a seller</a>
+                    <a class="text-body mr-3" href="#">About</a>
+                    <a class="text-body mr-3" href="#">Support</a>
+                    <a class="text-body mr-3" href="#">FAQs</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -200,35 +200,25 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i
+                            <a class="text-secondary mb-2" href="/"><i
                                     class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
+                            <a class="text-secondary mb-2" href="/products"><i class="fa fa-angle-right mr-2"></i>
                                 Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i
-                                    class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i
-                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                Us</a>
+                            <a class="text-secondary mb-2" href="/products/uploaded"><i
+                                    class="fa fa-angle-right mr-2"></i>
+                                My Products</a>
+                            <a class="text-secondary mb-2" href="/products/favorites"><i
+                                    class="fa fa-angle-right mr-2"></i>My Favorites</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i
-                                    class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
-                                Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i
-                                    class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i
-                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                Us</a>
+                            <a class="text-secondary mb-2" href="/products/uploaded"><i
+                                    class="fa fa-angle-right mr-2"></i>
+                                My Products</a>
+                            <a class="text-secondary mb-2" href="/products/favorites"><i
+                                    class="fa fa-angle-right mr-2"></i>My Favorites</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
@@ -260,7 +250,8 @@
         <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
             <div class="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="https://pixabay.com/">Pixabay</a>. All Rights Reserved. Designed
+                    &copy; <a class="text-primary" href="https://pixabay.com/">Pixabay</a>. All Rights Reserved.
+                    Designed
                     by
                     <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
                     <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
