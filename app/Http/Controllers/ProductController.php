@@ -30,28 +30,31 @@ class ProductController extends Controller
             $index++;
         }
 
-        // $pagingNumber = 1;
         $pagingNumber = config('constants.PAGING_PAGENUMBER');
 
         $dataToPass = [];
 
-        // return view('products.index', ['products' => Product::latest()->filter(request(['search', 'category']))->paginate($pagingNumber)])->with('message', $filterMessage);
+        $favorites = null;
         if (auth()->check()) {
             $favorites = Favorite::userFavorites();
-
-            $dataToPass = [
-                'products' => Product::latest()
-                    ->filter(request(['search', 'category']))
-                    ->paginate($pagingNumber),
-                'favorites' => $favorites
-            ];
-
-            return view('products.index', $dataToPass)->with('message', $filterMessage);
-        } else if (auth()->check() == false) {
-            // dd(empty($filterMessage));
-            $dataToPass = ['products' => Product::latest()->filter(request(['search', 'category']))->paginate($pagingNumber)];
-            return view('products.index', $dataToPass)->with('message', $filterMessage);
         }
+        $dataToPass = [
+            'products' => Product::latest()->filter(request(['search', 'category']))->paginate($pagingNumber), 'favorites' => $favorites
+        ];
+        return view('products.index', $dataToPass)->with('message', $filterMessage);
+    }
+
+    public function filterForm(Request $request) {
+        $products = Product::filterForm($request);
+
+        $favorites = null;
+        if (auth()->check()) {
+            $favorites = Favorite::userFavorites();
+        }
+        $dataToPass = [
+            'products' => $products, 'favorites' => $favorites
+        ];
+        return view('products.index', $dataToPass)->with('message', ["Filter"]);
     }
 
     public function show(Product $product)

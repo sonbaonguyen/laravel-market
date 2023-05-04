@@ -11,6 +11,7 @@
         {{-- <a href="/products/{{ $product->id }}"> --}}
         <img class="w-100 img-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[0] }}" alt="">
         <div class="product-action">
+            @auth
             <a class="btn btn-outline-dark btn-square" href="#"><i class="fa fa-shopping-cart"></i></a>
             <form class="toggle-favorite-form"  method="POST">
                 {{-- action="/products/{{ $product->id }}/favorite" --}}
@@ -19,6 +20,7 @@
                 {{-- This used to contain data to ajax --}}
                 <p class="toggle-favorite-pid" hidden>{{ $product->id }}</p>
             </form>
+            @endauth
             <a class="btn btn-outline-dark btn-square" href="/products/{{ $product->id }}"><i
                     class="fa fa-search"></i></a>
         </div>

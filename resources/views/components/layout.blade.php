@@ -261,6 +261,11 @@
                     by
                     <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
                     <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    {{-- <form action="/products/filter/price" method="POST">
+                        @csrf
+                        <button type="submit">Hello There</button>
+                    </form>
+                    <a href="/products/filter/price">Hello GET</a> --}}
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
@@ -340,7 +345,28 @@
                     });
                 })
             }
+
+            // $("#form-filter").on('submit', function (e) {
+            //     e.preventDefault();
+
+            //     // Call ajax to get a list of filtered products with this price
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "/products/filter",
+            //         // data: $(this).find("input").val(),
+            //         data: 2,
+            //         success: function(response) {
+            //             console.log("Success: " + response);
+            //         },
+            //         error: function(error) {
+            //             console.log("Error: " + error);
+            //         }
+            //     })
+            // });
+
+
         });
+
     </script>
 </body>
 

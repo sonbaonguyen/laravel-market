@@ -37,6 +37,29 @@ class Product extends Model
         }
     }
 
+    public static function filterForm(Request $request) {
+        $products = DB::table('products');
+        $products = $products->whereBetween('price', [0, $request->max_price]);
+
+        if ($request->colors ?? false) {
+            foreach ($request->colors as $color) {
+                $products = $products->where('colors', 'like', '%' . $color . '%');
+            }
+        }
+
+        if ($request->sizes ?? false) {
+            foreach ($request->sizes as $size) {
+                $products = $products->where('sizes', 'like', '%' . $size . '%');
+            }
+        }
+
+        // dd($products->toSql());
+
+        $pagingNumber = config('constants.PAGING_PAGENUMBER');
+        $products = $products->paginate($pagingNumber);
+        return $products;
+    }
+
     public static function storeProduct(Request $request)
     {
         $formFields = $request->validate([

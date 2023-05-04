@@ -21,6 +21,9 @@ Route::get('/', [ProductController::class, 'homepage']);
 
 // Index
 Route::get('/products', [ProductController::class, 'index']);
+// Filter price
+Route::post('/products/filter', [ProductController::class, 'filterForm']);
+
 
 // create
 Route::get('/products/upload', [ProductController::class, 'create'])->middleware('auth');
