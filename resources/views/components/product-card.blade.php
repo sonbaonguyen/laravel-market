@@ -9,7 +9,7 @@
     <div
         class="product-img position-relative overflow-hidden img-contain-card-fixed d-flex justify-content-center align-items-center">
         {{-- <a href="/products/{{ $product->id }}"> --}}
-        <img class="w-100 img-custom-size-fixed" src="{{ URL::to('/') }}/storage/{{ $images[0] }}" alt="">
+        <img class="w-100 img-custom-size-fixed" src="{{ URL::to('/') }}/uploads/{{ $images[0] }}" alt="">
         <div class="product-action">
             @auth
             <a class="btn btn-outline-dark btn-square" href="#"><i class="fa fa-shopping-cart"></i></a>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -77,7 +78,7 @@ class Product extends Model
             $imageAll = '';
             // dd($request->file('image_path'));
             foreach ($request->file('image_path') as $image) {
-                $imageAll = $imageAll . '@' . $image->store('logos', 'public');
+                $imageAll = $imageAll . '@' . Storage::disk('public')->put('images', $image);
             }
             // dd($imageAll);
             $formFields['image_path'] = $imageAll;

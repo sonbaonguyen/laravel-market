@@ -38,6 +38,15 @@ class DatabaseSeeder extends Seeder
             'categories' => '@Women@Clothes@Accessories@'
         ]);
 
+
+        $pass = 'tester02xz';
+        $pass = bcrypt($pass);
+        \App\Models\User::factory()->create([
+            'name' => 'Tester02',
+            'email' => 'tester02@gmail.com',
+            'password' => $pass
+        ]);
+
         // Categories
         Category::factory()->create(['name' => 'Men']);
         Category::factory()->create(['name' => 'Women']);

@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'categories' => $this->faker->word(),
             'total_review' => $this->faker->numberBetween(1, 200),
             'price' => $this->faker->randomFloat(null, 1, 500),
-            'image_path' => '@logos/1IVVFLQob3gpTcEPXDDAYwMtrozeOl0MobGRIXEz.jpg',
+            'image_path' => '@images/1IVVFLQob3gpTcEPXDDAYwMtrozeOl0MobGRIXEz.jpg',
             'colors' => '@Green@Black',
             'sizes' => '@M@XL',
             'short_description' => $this->faker->paragraph(1),

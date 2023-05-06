@@ -33,7 +33,7 @@
                             <div>To: <span id="maxrange">500$</span></div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <input id="price_filter" name="max_price" class="w-100" type="range" min="0" max="500"
+                            <input id="price_filter" name="max_price" class="w-100" value="500" type="range" min="0" max="500"
                                 step="20"
                                 oninput="document.getElementById('maxrange').innerHTML = this.value + '$'">
                         </div>
